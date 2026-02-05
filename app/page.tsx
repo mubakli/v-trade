@@ -21,9 +21,9 @@ export default function Home() {
                   Start Trading Now
                 </Button>
               </Link>
-              <Link href="/features">
+              <Link href="/dashboard">
                 <Button variant="outline" size="lg" className="w-full sm:w-auto font-semibold text-lg px-8">
-                  Explore Features
+                  View Dashboard
                 </Button>
               </Link>
             </div>

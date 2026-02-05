@@ -1,1 +1,149 @@
 @import "tailwindcss";
+
+@import "tailwindcss";
+
+@theme {
+  /* 
+    Map Tailwind theme tokens to dynamic CSS variables 
+    to support Light/Dark mode switching.
+  */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --radius-lg: 0.75rem;
+  --radius-md: 0.5rem;
+  --radius-sm: 0.25rem;
+  
+  @keyframes shine {
+    from { background-position: 0 0; }
+    to { background-position: -200% 0; }
+  }
+  --animate-shine: shine 2s linear infinite;
+}
+
+/* Base Styles & Theme Variables */
+@layer base {
+  :root {
+    /* Light Mode: "Bright Cosmos" */
+    --background: oklch(99% 0.005 260);
+    --foreground: oklch(20% 0.05 260);
+
+    --card: oklch(100% 0 0);
+    --card-foreground: oklch(20% 0.05 260);
+
+    --popover: oklch(100% 0 0);
+    --popover-foreground: oklch(20% 0.05 260);
+
+    --primary: oklch(55% 0.2 260);       /* Deep Vivid Violet for contrast on light */
+    --primary-foreground: oklch(98% 0 0);
+
+    --secondary: oklch(96% 0.01 260);
+    --secondary-foreground: oklch(20% 0.05 260);
+
+    --muted: oklch(96% 0.01 260);
+    --muted-foreground: oklch(50% 0.02 260);
+
+    --accent: oklch(94% 0.02 260);
+    --accent-foreground: oklch(20% 0.05 260);
+
+    --destructive: oklch(60% 0.2 20);
+    --destructive-foreground: oklch(98% 0 0);
+    
+    --success: oklch(65% 0.18 150);
+    --success-foreground: oklch(98% 0 0);
+
+    --border: oklch(92% 0.02 260);
+    --input: oklch(90% 0.02 260);
+    --ring: oklch(55% 0.2 260);
+    
+    color-scheme: light;
+  }
+
+  .dark {
+    /* Dark Mode: "Deep Cosmos" */
+    --background: oklch(12% 0.02 260);
+    --foreground: oklch(98% 0.005 260);
+
+    --card: oklch(16% 0.03 260);
+    --card-foreground: oklch(98% 0.005 260);
+
+    --popover: oklch(16% 0.03 260);
+    --popover-foreground: oklch(98% 0.005 260);
+
+    --primary: oklch(60% 0.2 260);
+    --primary-foreground: oklch(98% 0 0);
+
+    --secondary: oklch(25% 0.04 260);
+    --secondary-foreground: oklch(98% 0 0);
+
+    --muted: oklch(20% 0.03 260);
+    --muted-foreground: oklch(70% 0.02 260);
+
+    --accent: oklch(25% 0.05 260);
+    --accent-foreground: oklch(98% 0 0);
+
+    --destructive: oklch(55% 0.2 20);
+    --destructive-foreground: oklch(98% 0 0);
+    
+    --success: oklch(65% 0.18 150);
+    --success-foreground: oklch(98% 0 0);
+
+    --border: oklch(25% 0.04 260);
+    --input: oklch(25% 0.04 260);
+    --ring: oklch(60% 0.2 260);
+    
+    color-scheme: dark;
+  }
+  
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+/* Utility Extensions */
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  .glass {
+    background: color-mix(in oklch, var(--background), transparent 20%);
+    backdrop-filter: blur(12px);
+    border: 1px solid color-mix(in oklch, var(--foreground), transparent 95%);
+  }
+  
+  .glass-hover:hover {
+    background: color-mix(in oklch, var(--background), transparent 10%);
+    border-color: color-mix(in oklch, var(--foreground), transparent 90%);
+  }
+}
