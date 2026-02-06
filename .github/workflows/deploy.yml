@@ -9,7 +9,7 @@ permissions:
   packages: write
 
 env:
-  IMAGE_NAME: v-trade
+  IMAGE_NAME: v-trade-web
 
 jobs:
   build_and_push:
