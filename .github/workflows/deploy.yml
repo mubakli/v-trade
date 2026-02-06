@@ -36,6 +36,7 @@ jobs:
             ghcr.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
 
   deploy:
+    environment: GH_PAT
     needs: build_and_push
     runs-on: ubuntu-latest
     steps:
