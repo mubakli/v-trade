@@ -12,6 +12,7 @@ env:
   IMAGE_NAME: v-trade-web
 
 jobs:
+  environment: GH_PAT
   build_and_push:
     runs-on: ubuntu-latest
     steps:
