@@ -2,14 +2,14 @@ name: Deploy (prod)
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
 
 permissions:
   contents: read
   packages: write
 
 env:
-  IMAGE_NAME: v-trade-web
+  IMAGE_NAME: v-trade
 
 jobs:
   build_and_push:
@@ -47,15 +47,14 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
-          port: ${{ secrets.SSH_PORT }}
+          port: 22
           script: |
             set -e
-            cd ${{ secrets.APP_DIR }}
+            cd "${{ secrets.APP_DIR }}"
 
-            echo "${{ secrets.GH_PAT }}" | docker login ghcr.io -u "${{ secrets.GH_USER }}" --password-stdin
+            echo "${{ secrets.GH_PAT }}" | docker login ghcr.io -u mubakli --password-stdin
 
             docker compose pull web
             docker compose up -d
-
             docker image prune -f
             docker compose ps
