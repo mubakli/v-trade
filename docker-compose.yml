@@ -1,6 +1,6 @@
 services:
   web:
-    image: ghcr.io/mubakli/v-trade:latest
+    image: ghcr.io/mubakli/v-trade-web:latest
     ports:
       - "3532:3000"
     environment:
