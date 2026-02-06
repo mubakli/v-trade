@@ -12,8 +12,8 @@ env:
   IMAGE_NAME: v-trade-web
 
 jobs:
-  environment: GH_PAT
   build_and_push:
+    environment: GH_PAT
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
