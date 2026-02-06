@@ -3,13 +3,23 @@ import { cn } from "@/lib/utils";
 
 export function Logo({ className }: { className?: string }) {
   return (
-    <Link href="/" className={cn("flex items-center gap-2 group", className)}>
-      <div className="relative flex items-center justify-center w-8 h-8 rounded-lg bg-indigo-500/20 group-hover:bg-indigo-500/30 transition-colors border border-indigo-500/30">
-        <div className="w-3 h-3 rounded-full bg-indigo-500 shadow-[0_0_10px_rgba(99,102,241,0.5)]"></div>
+    <Link href="/" className={cn("flex items-center gap-3 group", className)}>
+      {/* Icon: Abstract Geometric V / Chart in Primary Orange */}
+      <div className="relative w-10 h-10 flex items-center justify-center overflow-hidden transition-transform group-hover:-translate-y-1">
+        <svg viewBox="0 0 24 24" fill="none" className="w-8 h-8 text-primary" xmlns="http://www.w3.org/2000/svg">
+          <path fillRule="evenodd" clipRule="evenodd" d="M12 2L2 22H22L12 2ZM12 6.5L18.5 19H5.5L12 6.5Z" fill="currentColor"/>
+          <path d="M12 12V16" stroke="currentColor" strokeWidth="2" />
+        </svg>
       </div>
-      <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400">
-        vTrade
-      </span>
+      
+      <div className="flex flex-col">
+        <span className="text-xl font-black uppercase tracking-tighter leading-none text-foreground group-hover:text-primary transition-colors font-mono">
+          vTRADE
+        </span>
+        <span className="text-[0.6rem] font-bold uppercase tracking-widest text-primary leading-none">
+          PROTOCOL
+        </span>
+      </div>
     </Link>
   );
 }

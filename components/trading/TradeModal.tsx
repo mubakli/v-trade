@@ -199,52 +199,48 @@ export default function TradeModal({
   const balance = wallet ? parseFloat(wallet.balance) : 0;
 
   return (
-    <div className="fixed inset-0 bg-background/80 backdrop-blur-sm flex items-center justify-center z-50 p-0 md:p-4 animate-in fade-in duration-200">
-      <div className="bg-card w-full h-full md:h-auto md:rounded-2xl border-0 md:border border-border md:max-w-md p-4 md:p-6 shadow-2xl relative overflow-y-auto md:max-h-[85vh]">
-        {/* Glow effects */}
-        <div className="hidden md:block absolute top-0 left-1/2 -translate-x-1/2 w-32 h-32 bg-primary/20 rounded-full blur-3xl -z-10" />
+    <div className="fixed inset-0 bg-background/90 backdrop-blur-none flex items-center justify-center z-50 p-0 md:p-4 animate-in fade-in duration-200">
+      <div className="bg-card w-full h-full md:h-auto md:max-h-[85vh] md:rounded-none border-0 md:border-2 border-border md:max-w-md p-4 md:p-6 shadow-none relative overflow-y-auto">
         
         {/* Header */}
-        <div className="flex items-center justify-between mb-6 sticky top-0 bg-card z-10 pb-2 border-b md:border-0 border-border/50">
+        <div className="flex items-center justify-between mb-6 sticky top-0 bg-card z-10 pb-2 border-b-2 border-border">
           <div className="flex items-center gap-3">
-            <img src={crypto.image} alt={crypto.name} className="w-10 h-10 rounded-full bg-white/5 p-1" />
+            <img src={crypto.image} alt={crypto.name} className="w-10 h-10 rounded-none bg-secondary/20 p-1 border border-border" />
             <div>
-              <h2 className="text-xl font-bold text-foreground flex items-center gap-2">
+              <h2 className="text-xl font-bold text-foreground flex items-center gap-2 uppercase tracking-tight">
                 Trade {crypto.name}
-                <span className="text-xs font-normal text-muted-foreground bg-secondary px-2 py-0.5 rounded-full">
-                  {crypto.symbol.toUpperCase()}
-                </span>
               </h2>
-              <p className="text-sm font-medium text-primary">
-                ${crypto.current_price.toLocaleString()}
+              <p className="text-sm font-bold text-primary font-mono rounded-none">
+                ${crypto.current_price.toLocaleString()} <span className="text-muted-foreground text-xs">{crypto.symbol.toUpperCase()}</span>
               </p>
             </div>
           </div>
-          <Button variant="ghost" size="icon" onClick={onClose} className="rounded-full hover:bg-secondary">
-            <svg className="w-5 h-5 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <Button variant="ghost" size="icon" onClick={onClose} className="rounded-none hover:bg-destructive hover:text-destructive-foreground border border-transparent hover:border-destructive">
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
             </svg>
           </Button>
         </div>
 
         {/* Mode Toggle */}
-        <div className="flex p-1 bg-secondary rounded-xl mb-6">
+        <div className="flex border-2 border-border mb-6">
           <button
             onClick={() => setMode('BUY')}
-            className={`flex-1 py-2.5 rounded-lg font-semibold text-sm transition-all ${
+            className={`flex-1 py-3 font-bold text-sm uppercase tracking-wide transition-all ${
               mode === 'BUY'
-                ? 'bg-emerald-500 text-white shadow-lg shadow-emerald-500/20'
-                : 'text-muted-foreground hover:text-foreground hover:bg-white/5'
+                ? 'bg-primary text-primary-foreground'
+                : 'text-muted-foreground hover:bg-secondary hover:text-foreground'
             }`}
           >
             Buy
           </button>
+          <div className="w-0.5 bg-border self-stretch"></div>
           <button
             onClick={() => setMode('SELL')}
-            className={`flex-1 py-2.5 rounded-lg font-semibold text-sm transition-all ${
+            className={`flex-1 py-3 font-bold text-sm uppercase tracking-wide transition-all ${
               mode === 'SELL'
-                ? 'bg-rose-500 text-white shadow-lg shadow-rose-500/20'
-                : 'text-muted-foreground hover:text-foreground hover:bg-white/5'
+                ? 'bg-destructive text-destructive-foreground'
+                : 'text-muted-foreground hover:bg-secondary hover:text-foreground'
             }`}
           >
             Sell
@@ -252,8 +248,8 @@ export default function TradeModal({
         </div>
 
         {/* Current Price */}
-        <div className="mb-6 px-4 py-3 bg-secondary/50 rounded-xl border border-border flex justify-between items-center">
-            <span className="text-sm text-muted-foreground">Current Price</span>
+        <div className="mb-6 px-4 py-3 bg-secondary rounded-none border border-border flex justify-between items-center">
+            <span className="text-sm font-bold uppercase text-muted-foreground">Current Price</span>
             <span className="text-lg font-mono font-bold text-foreground">
               ${crypto.current_price.toLocaleString('en-US', {
                 minimumFractionDigits: 2,
@@ -264,16 +260,16 @@ export default function TradeModal({
 
         {/* Input Mode Toggle */}
         <div className="mb-2 flex justify-end">
-          <div className="flex gap-1 text-xs font-medium bg-secondary p-1 rounded-lg">
+          <div className="flex gap-[-2px]">
             <button
               onClick={() => {
                 setInputMode('CRYPTO');
                 setAmount('');
               }}
-              className={`px-3 py-1 rounded-md transition-all ${
+              className={`px-3 py-1 text-xs font-bold border-2 border-border uppercase transition-all ${
                 inputMode === 'CRYPTO'
-                  ? 'bg-primary text-primary-foreground shadow'
-                  : 'text-muted-foreground hover:text-foreground'
+                  ? 'bg-foreground text-background border-foreground'
+                  : 'text-muted-foreground hover:bg-secondary border-r-0'
               }`}
             >
               {crypto.symbol}
@@ -283,10 +279,10 @@ export default function TradeModal({
                 setInputMode('USD');
                 setAmount('');
               }}
-              className={`px-3 py-1 rounded-md transition-all ${
+              className={`px-3 py-1 text-xs font-bold border-2 border-border uppercase transition-all ${
                 inputMode === 'USD'
-                  ? 'bg-primary text-primary-foreground shadow'
-                  : 'text-muted-foreground hover:text-foreground'
+                  ? 'bg-foreground text-background border-foreground'
+                  : 'text-muted-foreground hover:bg-secondary border-l-0'
               }`}
             >
               USD
@@ -296,12 +292,12 @@ export default function TradeModal({
 
         {/* Amount Input */}
         <div className="mb-4">
-          <label className="block text-sm font-medium text-muted-foreground mb-2 ml-1">
+          <label className="block text-sm font-bold uppercase text-muted-foreground mb-2">
             Amount
           </label>
           <div className="relative">
             {inputMode === 'USD' && (
-              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground font-medium">
+              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-foreground font-bold">
                 $
               </span>
             )}
@@ -311,16 +307,16 @@ export default function TradeModal({
               onChange={(e) => setAmount(e.target.value)}
               placeholder="0.00"
               step={inputMode === 'USD' ? '0.01' : '0.00000001'}
-              className={`${inputMode === 'USD' ? 'pl-7' : ''} font-mono text-lg bg-secondary/50`}
+              className={`${inputMode === 'USD' ? 'pl-7' : ''} font-mono text-lg bg-background border-2 border-foreground`}
               autoFocus
             />
           </div>
         </div>
 
         {/* Conversion Display */}
-        <div className="mb-6 px-4 py-3 bg-secondary/50 rounded-xl border border-border">
+        <div className="mb-6 px-4 py-3 bg-secondary rounded-none border border-border">
           <div className="flex justify-between items-center">
-            <p className="text-sm text-muted-foreground">
+            <p className="text-sm font-bold uppercase text-muted-foreground">
               {inputMode === 'CRYPTO' ? 'Estimated Cost' : 'Estimated Amount'}
             </p>
             <p className="text-lg font-mono font-bold text-foreground">
@@ -328,7 +324,7 @@ export default function TradeModal({
                 `$${usdValue.toLocaleString('en-US', {
                   minimumFractionDigits: 2,
                   maximumFractionDigits: 2,
-                })}`
+                  })}`
               ) : (
                 `${cryptoAmount.toFixed(8)} ${crypto.symbol}`
               )}
@@ -340,26 +336,22 @@ export default function TradeModal({
         {mode === 'BUY' && (
           <div className="mb-6 space-y-4">
             {/* Stop-Loss */}
-            <div className="p-4 rounded-xl border border-border bg-secondary/20">
+            <div className="p-4 rounded-none border-2 border-border bg-background">
               <div className="flex items-center justify-between mb-3">
-                <label className="text-sm font-medium text-foreground flex items-center gap-2">
-                  <svg className="w-4 h-4 text-rose-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6" />
-                  </svg>
+                <label className="text-sm font-bold text-foreground flex items-center gap-2 uppercase">
+                  <div className="w-3 h-3 bg-red-500 rounded-none transform rotate-45"></div>
                   Stop-Loss
                 </label>
                 <button
                   type="button"
                   onClick={() => setEnableStopLoss(!enableStopLoss)}
-                  className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
-                    enableStopLoss ? 'bg-rose-500' : 'bg-secondary'
+                  className={`w-12 h-6 border-2 border-foreground transition-colors flex items-center px-0.5 ${
+                    enableStopLoss ? 'bg-foreground justify-end' : 'bg-background justify-start'
                   }`}
                 >
-                  <span
-                    className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
-                      enableStopLoss ? 'translate-x-6' : 'translate-x-1'
-                    }`}
-                  />
+                  <div className={`w-4 h-4 border-2 border-foreground transition-all ${
+                     enableStopLoss ? 'bg-background' : 'bg-foreground'
+                  }`} />
                 </button>
               </div>
               {enableStopLoss && (
@@ -370,36 +362,32 @@ export default function TradeModal({
                     onChange={(e) => setStopLossPrice(e.target.value)}
                     placeholder={`< $${crypto.current_price.toFixed(2)}`}
                     step="0.01"
-                    className="font-mono bg-secondary/50"
+                    className="font-mono bg-background"
                   />
-                  <p className="text-xs text-muted-foreground mt-1">
-                    Sell if price drops to this level
+                  <p className="text-xs text-muted-foreground mt-1 font-mono uppercase">
+                    Trigger Sell Price
                   </p>
                 </div>
               )}
             </div>
 
             {/* Take-Profit */}
-            <div className="p-4 rounded-xl border border-border bg-secondary/20">
+            <div className="p-4 rounded-none border-2 border-border bg-background">
               <div className="flex items-center justify-between mb-3">
-                <label className="text-sm font-medium text-foreground flex items-center gap-2">
-                  <svg className="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-                  </svg>
+                <label className="text-sm font-bold text-foreground flex items-center gap-2 uppercase">
+                   <div className="w-3 h-3 bg-emerald-500 rounded-none transform rotate-45"></div>
                   Take-Profit
                 </label>
                 <button
                   type="button"
                   onClick={() => setEnableTakeProfit(!enableTakeProfit)}
-                  className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
-                    enableTakeProfit ? 'bg-emerald-500' : 'bg-secondary'
+                  className={`w-12 h-6 border-2 border-foreground transition-colors flex items-center px-0.5 ${
+                    enableTakeProfit ? 'bg-foreground justify-end' : 'bg-background justify-start'
                   }`}
                 >
-                  <span
-                    className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
-                      enableTakeProfit ? 'translate-x-6' : 'translate-x-1'
-                    }`}
-                  />
+                  <div className={`w-4 h-4 border-2 border-foreground transition-all ${
+                     enableTakeProfit ? 'bg-background' : 'bg-foreground'
+                  }`} />
                 </button>
               </div>
               {enableTakeProfit && (
@@ -410,10 +398,10 @@ export default function TradeModal({
                     onChange={(e) => setTakeProfitPrice(e.target.value)}
                     placeholder={`> $${crypto.current_price.toFixed(2)}`}
                     step="0.01"
-                    className="font-mono bg-secondary/50"
+                    className="font-mono bg-background"
                   />
-                  <p className="text-xs text-muted-foreground mt-1">
-                    Sell if price rises to this level
+                   <p className="text-xs text-muted-foreground mt-1 font-mono uppercase">
+                    Trigger Sell Price
                   </p>
                 </div>
               )}
@@ -422,15 +410,15 @@ export default function TradeModal({
         )}
 
         {/* Available Info */}
-        <div className="mb-6 flex justify-between text-sm px-1">
+        <div className="mb-6 flex justify-between text-sm px-1 font-mono">
           <div>
-            <p className="text-muted-foreground mb-0.5">Available Balance</p>
-            <p className="text-foreground font-medium">${balance.toFixed(2)}</p>
+            <p className="text-muted-foreground mb-0.5 uppercase text-xs">Available Balance</p>
+            <p className="text-foreground font-bold">${balance.toFixed(2)}</p>
           </div>
           {mode === 'SELL' && (
             <div className="text-right">
-              <p className="text-muted-foreground mb-0.5">Your Holdings</p>
-              <p className="text-foreground font-medium">
+              <p className="text-muted-foreground mb-0.5 uppercase text-xs">Your Holdings</p>
+              <p className="text-foreground font-bold">
                 {holdings} {crypto.symbol}
               </p>
             </div>
@@ -439,13 +427,8 @@ export default function TradeModal({
 
         {/* Error Message */}
         {error && (
-          <div className="mb-6 p-3 bg-destructive/10 border border-destructive/20 rounded-lg animate-in fade-in slide-in-from-top-1">
-            <p className="text-destructive text-sm font-medium flex items-center gap-2">
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-              {error}
-            </p>
+          <div className="mb-6 p-3 bg-destructive text-destructive-foreground border-2 border-destructive rounded-none font-bold text-sm">
+            {error}
           </div>
         )}
 
@@ -453,23 +436,13 @@ export default function TradeModal({
         <Button
           onClick={handleTrade}
           disabled={loading || !amount}
-          className={`w-full py-6 text-lg font-bold shadow-lg transition-all active:scale-[0.98] ${
+          className={`w-full py-6 text-lg font-black uppercase tracking-wider rounded-none transition-all active:translate-y-1 ${
             mode === 'BUY'
-              ? 'bg-emerald-500 hover:bg-emerald-600 shadow-emerald-500/20 text-white'
-              : 'bg-rose-500 hover:bg-rose-600 shadow-rose-500/20 text-white'
+              ? 'bg-primary hover:bg-primary/90 text-primary-foreground border-2 border-transparent'
+              : 'bg-destructive hover:bg-destructive/90 text-destructive-foreground border-2 border-transparent'
           }`}
         >
-          {loading ? (
-            <span className="flex items-center gap-2">
-              <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-              </svg>
-              Processing...
-            </span>
-          ) : (
-            `${mode === 'BUY' ? 'Buy' : 'Sell'} ${crypto.symbol}`
-          )}
+          {loading ? 'PROCESSING...' : `${mode === 'BUY' ? 'BUY' : 'SELL'} ${crypto.symbol}`}
         </Button>
       </div>
      {/* Backdrop for explicit click-out */}

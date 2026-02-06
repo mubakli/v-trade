@@ -1,9 +1,18 @@
-import { getTopCryptos } from "@/lib/services/crypto-api";
-import { NextResponse } from "next/server";
+import { getTopCryptos, searchCrypto } from "@/lib/services/crypto-api";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function GET() {
+export async function GET(request: NextRequest) {
   try {
-    const cryptos = await getTopCryptos(50);
+    const { searchParams } = new URL(request.url);
+    const query = searchParams.get('query');
+
+    let cryptos;
+    if (query) {
+      cryptos = await searchCrypto(query);
+    } else {
+      cryptos = await getTopCryptos(50);
+    }
+
     return NextResponse.json({ cryptos });
   } catch (error) {
     console.error("Error fetching cryptos:", error);

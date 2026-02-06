@@ -19,12 +19,12 @@ export default function DashboardPage() {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8 max-w-7xl animate-in fade-in duration-500">
+    <div className="container mx-auto px-4 py-8 max-w-7xl animate-in fade-in duration-500 bg-grid-pattern min-h-screen">
       {/* Header */}
       <div className="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-white mb-2 tracking-tight">Trading Dashboard</h1>
-          <p className="text-slate-400">Manage your portfolio and trade cryptocurrencies</p>
+          <h1 className="text-4xl md:text-6xl font-extrabold text-foreground mb-2 tracking-tighter uppercase">Trading Dashboard</h1>
+          <p className="text-muted-foreground font-mono tracking-wide">Manage your portfolio and trade cryptocurrencies</p>
         </div>
       </div>
 
@@ -35,27 +35,27 @@ export default function DashboardPage() {
 
       {/* Tabs */}
       <div className="mb-6 overflow-x-auto pb-2 -mx-4 px-4 md:mx-0 md:px-0">
-        <div className="flex gap-2 border-b border-white/5 pb-1 w-max md:w-auto">
+        <div className="flex gap-2 border-b-2 border-border pb-0 w-max md:w-auto">
           <Button
-            variant={activeTab === 'market' ? 'secondary' : 'ghost'}
+            variant={activeTab === 'market' ? 'default' : 'ghost'}
             onClick={() => setActiveTab('market')}
-            className={`rounded-b-none rounded-t-lg whitespace-nowrap ${activeTab === 'market' ? 'bg-slate-800 text-white' : 'text-slate-400'}`}
+            className={`rounded-none border-b-0 ${activeTab === 'market' ? 'bg-foreground text-background hover:bg-foreground/90' : 'text-muted-foreground'}`}
           >
-            Market
+            MARKET
           </Button>
           <Button
-            variant={activeTab === 'portfolio' ? 'secondary' : 'ghost'}
+            variant={activeTab === 'portfolio' ? 'default' : 'ghost'}
             onClick={() => setActiveTab('portfolio')}
-            className={`rounded-b-none rounded-t-lg whitespace-nowrap ${activeTab === 'portfolio' ? 'bg-slate-800 text-white' : 'text-slate-400'}`}
+            className={`rounded-none border-b-0 ${activeTab === 'portfolio' ? 'bg-foreground text-background hover:bg-foreground/90' : 'text-muted-foreground'}`}
           >
-            Portfolio
+            PORTFOLIO
           </Button>
           <Button
-            variant={activeTab === 'history' ? 'secondary' : 'ghost'}
+            variant={activeTab === 'history' ? 'default' : 'ghost'}
             onClick={() => setActiveTab('history')}
-            className={`rounded-b-none rounded-t-lg whitespace-nowrap ${activeTab === 'history' ? 'bg-slate-800 text-white' : 'text-slate-400'}`}
+            className={`rounded-none border-b-0 ${activeTab === 'history' ? 'bg-foreground text-background hover:bg-foreground/90' : 'text-muted-foreground'}`}
           >
-            History
+            HISTORY
           </Button>
         </div>
       </div>

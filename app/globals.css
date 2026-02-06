@@ -52,74 +52,78 @@
 /* Base Styles & Theme Variables */
 @layer base {
   :root {
-    /* Light Mode: "Bright Cosmos" */
-    --background: oklch(99% 0.005 260);
-    --foreground: oklch(20% 0.05 260);
+    /* Light Mode: "Neo-Brutalist Light" */
+    --background: #fafaf9; /* Stone-50 */
+    --foreground: #000000;
 
-    --card: oklch(100% 0 0);
-    --card-foreground: oklch(20% 0.05 260);
+    --card: #ffffff;
+    --card-foreground: #000000;
 
-    --popover: oklch(100% 0 0);
-    --popover-foreground: oklch(20% 0.05 260);
+    --popover: #ffffff;
+    --popover-foreground: #000000;
 
-    --primary: oklch(55% 0.2 260);       /* Deep Vivid Violet for contrast on light */
-    --primary-foreground: oklch(98% 0 0);
+    --primary: #ea580c; /* Orange-600 */
+    --primary-foreground: #ffffff;
 
-    --secondary: oklch(96% 0.01 260);
-    --secondary-foreground: oklch(20% 0.05 260);
+    --secondary: #ffffff;
+    --secondary-foreground: #000000;
 
-    --muted: oklch(96% 0.01 260);
-    --muted-foreground: oklch(50% 0.02 260);
+    --muted: #f5f5f4; /* Stone-100 */
+    --muted-foreground: #57534e; /* Stone-600 */
 
-    --accent: oklch(94% 0.02 260);
-    --accent-foreground: oklch(20% 0.05 260);
+    --accent: #f5f5f4;
+    --accent-foreground: #000000;
 
-    --destructive: oklch(60% 0.2 20);
-    --destructive-foreground: oklch(98% 0 0);
+    --destructive: #ef4444;
+    --destructive-foreground: #ffffff;
     
-    --success: oklch(65% 0.18 150);
-    --success-foreground: oklch(98% 0 0);
+    --success: #16a34a;
+    --success-foreground: #ffffff;
 
-    --border: oklch(92% 0.02 260);
-    --input: oklch(90% 0.02 260);
-    --ring: oklch(55% 0.2 260);
+    --border: #000000; /* High contrast borders */
+    --input: #000000;
+    --ring: #ea580c;
     
+    --radius: 0px; /* Sharp corners everywhere */
+
     color-scheme: light;
   }
 
   .dark {
-    /* Dark Mode: "Deep Cosmos" */
-    --background: oklch(12% 0.02 260);
-    --foreground: oklch(98% 0.005 260);
+    /* Dark Mode: "Neo-Brutalist Dark" */
+    --background: #000000; /* Pure Black */
+    --foreground: #fafaf9; /* Stone-50 */
 
-    --card: oklch(16% 0.03 260);
-    --card-foreground: oklch(98% 0.005 260);
+    --card: #000000;
+    --card-foreground: #fafaf9;
 
-    --popover: oklch(16% 0.03 260);
-    --popover-foreground: oklch(98% 0.005 260);
+    --popover: #000000;
+    --popover-foreground: #fafaf9;
 
-    --primary: oklch(60% 0.2 260);
-    --primary-foreground: oklch(98% 0 0);
+    --primary: #ea580c; /* Orange-600 */
+    --primary-foreground: #ffffff;
 
-    --secondary: oklch(25% 0.04 260);
-    --secondary-foreground: oklch(98% 0 0);
+    --secondary: #1c1917; /* Stone-900 */
+    --secondary-foreground: #fafaf9;
 
-    --muted: oklch(20% 0.03 260);
-    --muted-foreground: oklch(70% 0.02 260);
+    --muted: #1c1917;
+    --muted-foreground: #a8a29e; /* Stone-400 */
 
-    --accent: oklch(25% 0.05 260);
-    --accent-foreground: oklch(98% 0 0);
+    --accent: #1c1917;
+    --accent-foreground: #fafaf9;
 
-    --destructive: oklch(55% 0.2 20);
-    --destructive-foreground: oklch(98% 0 0);
+    --destructive: #7f1d1d;
+    --destructive-foreground: #fafaf9;
     
-    --success: oklch(65% 0.18 150);
-    --success-foreground: oklch(98% 0 0);
+    --success: #14532d;
+    --success-foreground: #fafaf9;
 
-    --border: oklch(25% 0.04 260);
-    --input: oklch(25% 0.04 260);
-    --ring: oklch(60% 0.2 260);
+    --border: #404040; /* Dark Gray for dark mode borders */
+    --input: #404040;
+    --ring: #ea580c;
     
+    --radius: 0px;
+
     color-scheme: dark;
   }
   
@@ -136,14 +140,23 @@
     text-wrap: balance;
   }
   
-  .glass {
-    background: color-mix(in oklch, var(--background), transparent 20%);
-    backdrop-filter: blur(12px);
-    border: 1px solid color-mix(in oklch, var(--foreground), transparent 95%);
+  /* Neo-Brutalist Dot Grid Pattern */
+  .bg-grid-pattern {
+    background-size: 40px 40px;
+    background-image: radial-gradient(circle, var(--border) 1px, transparent 1px);
+    mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
   }
   
-  .glass-hover:hover {
-    background: color-mix(in oklch, var(--background), transparent 10%);
-    border-color: color-mix(in oklch, var(--foreground), transparent 90%);
+  /* Sharp UI Utilities */
+  .sharp-shadow {
+    box-shadow: 4px 4px 0px 0px var(--border);
+  }
+  
+  .sharp-shadow-sm {
+    box-shadow: 2px 2px 0px 0px var(--border);
+  }
+  
+  .sharp-shadow-none {
+    box-shadow: none;
   }
 }

@@ -1,23 +1,24 @@
 services:
   web:
-    build: .
+    image: ghcr.io/mubakli/v-trade:latest
     ports:
-      - "3000:3000"
+      - "3532:3000"
     environment:
       - NODE_ENV=production
       - DATABASE_URL=postgres://postgres:postgres@db:5432/vtrade
     depends_on:
       - db
+    restart: unless-stopped
 
   db:
     image: postgres:15-alpine
-    restart: always
+    restart: unless-stopped
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: vtrade
     ports:
-      - "5432:5432"
+      - "127.0.0.1:5432:5432"
     volumes:
       - db-data:/var/lib/postgresql/data
 
