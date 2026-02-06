@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
 
@@ -42,7 +43,10 @@ export default function TradeModal({
   const [enableTakeProfit, setEnableTakeProfit] = useState(false);
   const [takeProfitPrice, setTakeProfitPrice] = useState('');
 
+  const [mounted, setMounted] = useState(false);
+
   useEffect(() => {
+    setMounted(true);
     if (isOpen) {
       fetchWalletAndHoldings();
     }
@@ -192,14 +196,14 @@ export default function TradeModal({
     }
   };
 
-  if (!isOpen) return null;
+  if (!isOpen || !mounted) return null;
 
   const cryptoAmount = getCryptoAmount();
   const usdValue = getUSDValue();
   const balance = wallet ? parseFloat(wallet.balance) : 0;
 
-  return (
-    <div className="fixed inset-0 bg-background/90 backdrop-blur-none flex items-center justify-center z-50 p-0 md:p-4 animate-in fade-in duration-200">
+  return createPortal(
+    <div className="fixed inset-0 bg-background/90 backdrop-blur-none flex items-center justify-center z-[100] p-0 md:p-4 animate-in fade-in duration-200">
       <div className="bg-card w-full h-full md:h-auto md:max-h-[85vh] md:rounded-none border-0 md:border-2 border-border md:max-w-md p-4 md:p-6 shadow-none relative overflow-y-auto">
         
         {/* Header */}
@@ -445,9 +449,9 @@ export default function TradeModal({
           {loading ? 'PROCESSING...' : `${mode === 'BUY' ? 'BUY' : 'SELL'} ${crypto.symbol}`}
         </Button>
       </div>
-     {/* Backdrop for explicit click-out */}
      <div className="fixed inset-0 -z-10" onClick={onClose} />
-    </div>
+    </div>,
+    document.body
   );
 }
 
