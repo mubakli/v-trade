@@ -62,8 +62,8 @@ export default function WalletBalance() {
 
   return (
     <div className="relative group">
-      <div className="absolute inset-0 bg-gradient-to-r from-primary/20 via-primary/10 to-accent/20 rounded-xl blur-xl opacity-50 group-hover:opacity-75 transition-opacity" />
-      <Card className="relative border-border bg-card/60 backdrop-blur-xl">
+      <div className="absolute inset-0 bg-gradient-to-r from-primary/30 via-primary/20 to-accent/30 rounded-xl blur-2xl opacity-75 group-hover:opacity-100 transition-opacity" />
+      <Card className="relative border-border bg-card/40 backdrop-blur-md">
         <CardContent className="pt-8 pb-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 divide-y md:divide-y-0 md:divide-x divide-border">
             {/* Cash Balance */}

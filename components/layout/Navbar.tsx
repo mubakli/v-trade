@@ -10,7 +10,7 @@ import { Menu, X, User, LogOut, ChevronDown } from "lucide-react";
 
 export function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [user, setUser] = useState<{ email: string } | null>(null);
+  const [user, setUser] = useState<{ name: string } | null>(null);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const router = useRouter();
 
@@ -21,8 +21,8 @@ export function Navbar() {
         const response = await fetch('/api/wallet');
         if (response.ok) {
           const data = await response.json();
-          if (data.wallet) {
-            setUser({ email: data.wallet.userId });
+          if (data.wallet && data.user) {
+            setUser({ name: data.user.name });
           }
         }
       } catch (error) {
@@ -76,7 +76,7 @@ export function Navbar() {
                   className="flex items-center gap-2 px-3 py-2 border-2 border-border hover:border-foreground transition-colors bg-secondary"
                 >
                   <User className="w-4 h-4" />
-                  <span className="text-xs font-bold uppercase tracking-wider">{user.email}</span>
+                  <span className="text-xs font-bold uppercase tracking-wider">{user.name}</span>
                   <ChevronDown className="w-3 h-3" />
                 </button>
                 
@@ -160,7 +160,7 @@ export function Navbar() {
                   <div className="px-3 py-2 bg-secondary border-l-2 border-primary">
                     <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-foreground">
                       <User className="w-4 h-4" />
-                      {user.email}
+                      {user.name}
                     </div>
                   </div>
                   <Button 
